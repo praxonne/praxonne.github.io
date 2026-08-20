@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const languages = [
+  "Rust", "TypeScript", "Python", "Go", "Dart", "Java", "Kotlin", "Swift",
+  "C#", "Ruby", "PHP", "Elixir", "Erlang", "Gleam", "C++", "Scala",
+];
+---
+
+<BaseLayout title="Developers" description="Praxonne's Zed-managed development workflow, schema-first SDK matrix, CLI distribution targets, and repository dependency order.">
+  <section class="page-hero">
+    <p class="eyebrow">Developer surface</p>
+    <h1>One contract.<br />Every useful runtime.</h1>
+    <p>Praxonne's public APIs begin as OpenAPI and JSON Schema, then flow into typed clients. Zed locks fleet dependencies and project runtimes; Cargo, pnpm, pub, and other native tools keep responsibility for language-local builds.</p>
+  </section>
+
+  <section class="developer-command">
+    <div>
+      <p class="eyebrow">Reproducible bootstrap</p>
+      <h2>Dependencies are code-reviewed inputs.</h2>
+      <p>The manifest and locks travel with every repository. Install hooks and dependency builds remain off unless a reviewed package explicitly requires them.</p>
+    </div>
+    <pre><code><span>$</span> zed validate --require-lock
+<span>$</span> zed install --frozen
+<span>$</span> zed task run check
+
+<i># native compilers consume the materialized graph</i></code></pre>
+  </section>
+
+  <section class="sdk-section">
+    <div class="section-heading">
+      <p class="eyebrow">SDK target matrix</p>
+      <h2>Sixteen language targets, one schema gate.</h2>
+      <p>The fleet is being built in dependency order. A language is publishable only when its generated public surface and hand-written transport pass the same fixtures in the test organization.</p>
+    </div>
+    <div class="language-cloud" aria-label="Planned Praxonne SDK languages">
+      {languages.map((language, index) => <span class={index < 3 ? "implemented" : "planned"}>{language}<small>{index < 3 ? "foundation" : "target"}</small></span>)}
+    </div>
+  </section>
+
+  <section class="distribution-section">
+    <div class="section-heading"><p class="eyebrow">CLI distribution</p><h2>Meet operators where they are.</h2></div>
+    <div class="distribution-grid">
+      <article><span>01</span><h3>Unix installer</h3><p>Checksum-verified release artifacts for curl-based installation without piping unreviewed scripts into a shell.</p></article>
+      <article><span>02</span><h3>Homebrew</h3><p>A versioned formula with fixed artifact digests for macOS and Linux.</p></article>
+      <article><span>03</span><h3>Windows</h3><p>Signed archives plus a winget manifest, with PowerShell verification examples.</p></article>
+    </div>
+  </section>
+
+  <section class="honesty-note">
+    <strong>Delivery status</strong>
+    <p>The repositories and contracts are under active hardening. “Target” labels above are intentional: they become “foundation” or “available” only after implementation, conformance, and release automation land.</p>
+  </section>
+</BaseLayout>

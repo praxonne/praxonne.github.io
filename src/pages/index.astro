@@ -1,0 +1,96 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProcessDiagram from "../components/ProcessDiagram.astro";
+
+const providers = ["Gemini 3.6 Pro", "ChatGPT SOL 5.6", "Claude Fable"];
+const surfaces = [
+  ["Proxy plane", "Forward, reverse, and bidirectional services isolate request work."],
+  ["Control plane", "Rust APIs, a Leptos web surface, CLI, Flutter, and native desktop clients."],
+  ["Contract plane", "Shared interfaces and JSON Schema keep services and 15+ SDK targets aligned."],
+  ["Operations plane", "Cloudflare Workers, Kubernetes app-of-apps manifests, and declarative data schemas."],
+];
+---
+
+<BaseLayout title="Praxonne" description="A programmable forward and reverse proxy that isolates each request in a child process and turns successful AI-generated capabilities into reviewable pull requests.">
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="status-dot"></span>Programmable proxy runtime · private preview</p>
+      <h1>Every request can become a <em>reviewed capability.</em></h1>
+      <p class="hero-lead">Praxonne connects forward and reverse proxy requests through bounded child processes. When a route needs new behavior, an approved AI bridge can generate a candidate, test it against the live contract, and propose the successful code as a draft pull request.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="/architecture/">Explore the architecture <span aria-hidden="true">→</span></a>
+        <a class="button secondary" href="/security/">Read the security model</a>
+      </div>
+      <p class="fine-print">Successful response ≠ trusted code. Human review and deployment policy stay in control.</p>
+    </div>
+    <div class="engine-map" aria-label="Praxonne request flow illustration">
+      <div class="map-grid"></div>
+      <div class="map-label top">request</div>
+      <div class="map-node gateway"><span>PX</span><small>policy gateway</small></div>
+      <div class="map-line line-a"></div>
+      <div class="map-node child"><span>fork()</span><small>child workload</small></div>
+      <div class="map-line line-b"></div>
+      <div class="map-node response"><span>2xx</span><small>contract result</small></div>
+      <div class="map-line line-c"></div>
+      <div class="map-node branch"><span>git</span><small>draft PR</small></div>
+      <div class="pulse pulse-one"></div>
+      <div class="pulse pulse-two"></div>
+      <div class="map-caption"><b>request → response</b><span>isolated, observable, reviewable</span></div>
+    </div>
+  </section>
+
+  <div class="signal-strip" aria-label="Praxonne characteristics">
+    <span>forward + reverse</span><i></i><span>process isolated</span><i></i><span>schema governed</span><i></i><span>PR native</span>
+  </div>
+
+  <ProcessDiagram />
+
+  <section class="split-section model-section">
+    <div class="section-heading sticky-heading">
+      <p class="eyebrow">Model-agnostic bridge</p>
+      <h2>Generate through a boundary you can replace.</h2>
+      <p>Praxonne does not bind proxy execution to a model vendor. Provider-specific credentials and protocols stay behind an agent bridge with allow-listed operations, bounded context, and auditable outputs.</p>
+      <a class="text-link" href="/security/">See every promotion gate <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="provider-stack">
+      {providers.map((provider, index) => (
+        <article class="provider-card">
+          <span>0{index + 1}</span>
+          <div><strong>{provider}</strong><small>bridge profile</small></div>
+          <b>candidate only</b>
+        </article>
+      ))}
+      <article class="provider-card open-card">
+        <span>+</span>
+        <div><strong>Your model</strong><small>same contract</small></div>
+        <b>portable</b>
+      </article>
+      <p class="profile-note">Profile names are deploy-time configuration supplied by the operator; they are not claims of provider availability or a released bridge integration.</p>
+    </div>
+  </section>
+
+  <section class="surface-section">
+    <div class="section-heading">
+      <p class="eyebrow">One system, explicit boundaries</p>
+      <h2>Built as a fleet—not a mystery box.</h2>
+    </div>
+    <div class="surface-grid">
+      {surfaces.map(([title, copy], index) => (
+        <article>
+          <span>0{index + 1}</span>
+          <h3>{title}</h3>
+          <p>{copy}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="guardrail-callout">
+    <p class="eyebrow">The non-negotiable</p>
+    <blockquote>Code can propose itself.<br /><em>It cannot approve itself.</em></blockquote>
+    <div>
+      <p>A `200..=302` response makes generated code eligible for review. Promotion still requires deterministic tests, provenance, an allow-listed repository, a feature branch, and a draft PR that explains what changed and why.</p>
+      <a class="button primary" href="/developers/">View the developer surface <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</BaseLayout>

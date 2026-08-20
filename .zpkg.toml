@@ -1,0 +1,32 @@
+[package]
+org = "praxonne"
+name = "praxonne-marketing-site"
+version = "0.1.0"
+description = "Praxonne Astro marketing site"
+license = "MIT"
+keywords = ["proxy", "ai", "astro", "github-pages", "zed-pkg"]
+
+[package.repository]
+vcs = "git"
+url = "https://github.com/praxonne/praxonne.github.io"
+
+[install]
+dir = ".vendor/.zed"
+
+[dependencies]
+
+[publish]
+include_readme = true
+tag_format = "v{version}"
+exclude = [
+  ".env", ".env.*", ".direnv/**", ".zed/**", ".vendor/.zed/**",
+  "dist/**", "node_modules/**", "tmp/**", "**/*.log", ".DS_Store"
+]
+
+[targets.repository]
+dir = "."
+name = "praxonne-marketing-site"
+adapter = "none"
+
+[scripts]
+test = "bash scripts/check.sh"

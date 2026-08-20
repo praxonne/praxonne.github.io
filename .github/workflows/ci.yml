@@ -1,0 +1,45 @@
+name: site conformance
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-conformance-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Install checksum-verified Zed
+        shell: bash
+        run: bash scripts/install-zed.sh
+
+      - name: Restore locked Zed dependencies and Node.js
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$PWD/.zed/bin:$PATH"
+          zed validate --require-lock
+          zed install --frozen
+          zed install --frozen --cli nodejs@24.19.0
+          echo "$PWD/.zed/tools/bin" >> "$GITHUB_PATH"
+
+      - name: Install locked Astro dependencies
+        shell: bash
+        run: corepack pnpm install --frozen-lockfile
+
+      - name: Typecheck, build, and verify site contract
+        shell: bash
+        run: corepack pnpm run check

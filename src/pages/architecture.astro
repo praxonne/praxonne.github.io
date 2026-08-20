@@ -1,0 +1,95 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const stages = [
+  ["Ingress", "Normalize the request, resolve tenant identity, and match only declared forward or reverse routes."],
+  ["Policy", "Freeze destination, bundle digest, model profile, budgets, and promotion permissions before execution."],
+  ["Child workload", "Connect request to response without a shell, inherited secrets, host mounts, or unrestricted egress."],
+  ["Contract", "Capture bounded output, response metadata, logs, and a content-addressed evidence record."],
+  ["Proposal", "For an eligible result, create an idempotent feature branch and draft PR through a least-privileged GitHub App."],
+];
+
+const repos = [
+  ["praxonne-interfaces", "Schemas and public/private type surfaces"],
+  ["praxonne-lib-core", "SeaORM entities and shared frontend/backend rules"],
+  ["praxonne-sync", "Praxonne facade over opto-sync contracts"],
+  ["praxonne-api-server.rs", "Rust JSON control-plane API"],
+  ["praxonne-web-server.rs", "Leptos multipage operations surface"],
+  ["prax-*-proxy-server.rs", "Forward, reverse, and bidirectional data plane"],
+  ["praxonne-clients", "Schema-conformant SDK matrix"],
+  ["praxonne-cli", "Cross-platform operator CLI"],
+  ["praxonne-infra", "Cloudflare and Kubernetes application manifests"],
+  ["praxonne-monorepo", "Zed-managed fleet inventory"],
+];
+---
+
+<BaseLayout title="Architecture" description="The target architecture for Praxonne's policy gateway, isolated child workloads, AI agent bridges, contract evaluation, and GitHub pull-request promotion loop.">
+  <section class="page-hero">
+    <p class="eyebrow">Target architecture</p>
+    <h1>A narrow waist between traffic, code, and review.</h1>
+    <p>Praxonne separates the data plane that connects requests from the control plane that may generate and propose new behavior. The shared boundary is a versioned, schema-validated execution contract.</p>
+  </section>
+
+  <section class="architecture-flow" aria-labelledby="flow-title">
+    <div class="section-heading">
+      <p class="eyebrow">End-to-end flow</p>
+      <h2 id="flow-title">Freeze policy first. Execute second.</h2>
+    </div>
+    <ol>
+      {stages.map(([title, copy], index) => (
+        <li>
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          <div><h3>{title}</h3><p>{copy}</p></div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="boundary-grid">
+    <article>
+      <p class="eyebrow">Data plane</p>
+      <h2>Fast path</h2>
+      <ul class="check-list">
+        <li>Explicit route and destination policy</li>
+        <li>One bounded child workload per connection</li>
+        <li>Backpressure, deadlines, and output caps</li>
+        <li>Structured evidence without payload leakage</li>
+      </ul>
+    </article>
+    <article>
+      <p class="eyebrow">Control plane</p>
+      <h2>Change path</h2>
+      <ul class="check-list">
+        <li>Provider-neutral Agent Pontifex bridge adapter, pinned provisionally</li>
+        <li>Content-addressed source and prompt provenance</li>
+        <li>Idempotent branch and draft PR creation</li>
+        <li>Human review and protected deployment</li>
+      </ul>
+    </article>
+  </section>
+
+  <section class="route-model">
+    <div>
+      <p class="eyebrow">Web routing invariant</p>
+      <h2>One route, one path-owned module.</h2>
+      <p>The Leptos web server's target pattern mirrors filesystem routing: each public path owns one route module, and a generated manifest rejects duplicates or orphaned pages at build time. SeaORM remains the data boundary; route modules never migrate schemas at boot.</p>
+    </div>
+    <pre aria-label="Example path-to-route mapping"><code>src/routes/
+├── index.rs          → /
+├── routes/index.rs   → /routes
+├── routes/_id.rs     → /routes/:id
+├── runs/index.rs     → /runs
+└── security.rs       → /security</code></pre>
+  </section>
+
+  <section class="repo-map">
+    <div class="section-heading">
+      <p class="eyebrow">Repository topology</p>
+      <h2>Small ownership surfaces, one dependency order.</h2>
+      <p>Interfaces → core → services → clients → infrastructure → fleet. Zed records cross-repository inputs while native toolchains compile each language.</p>
+    </div>
+    <div class="repo-list">
+      {repos.map(([name, purpose]) => <article><code>{name}</code><p>{purpose}</p></article>)}
+    </div>
+  </section>
+</BaseLayout>

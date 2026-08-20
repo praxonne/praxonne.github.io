@@ -1,0 +1,63 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const gates = [
+  ["Allow-list", "Resolve tenant, destination, repository, base ref, and agent profile before any child starts."],
+  ["Isolation", "Use an external sandbox with no host mounts, a read-only root, non-root identity, process/memory/CPU caps, and default-deny egress."],
+  ["Integrity", "Bind the request, candidate tree, tests, result, model profile, and dependency locks into one evidence digest."],
+  ["Conformance", "Require schema validation, unit/integration tests, secret scanning, dependency review, and policy checks."],
+  ["Git boundary", "Use a short-lived, repository-scoped GitHub App token. Push only a namespaced feature branch; create a draft PR; never merge."],
+  ["Review", "Protected branches, required checks, CODEOWNERS, and a human reviewer control promotion and deployment."],
+];
+---
+
+<BaseLayout title="Security" description="Praxonne's fail-closed security model for generated code, child-process isolation, provenance, least-privileged GitHub proposals, and human-controlled promotion.">
+  <section class="page-hero security-hero">
+    <p class="eyebrow">Fail closed by default</p>
+    <h1>Generation is a capability.<br />Trust is a process.</h1>
+    <p>Praxonne assumes prompts, upstream traffic, model output, generated source, and child-process output can all be hostile. The architecture contains each one and preserves evidence for review.</p>
+  </section>
+
+  <section class="security-equation" aria-label="Promotion rule">
+    <div><span>HTTP 200–302</span><small>runtime signal</small></div>
+    <b>+</b>
+    <div><span>policy + tests</span><small>deterministic gates</small></div>
+    <b>+</b>
+    <div><span>human review</span><small>promotion authority</small></div>
+    <b>=</b>
+    <div class="accent"><span>merge eligible</span><small>never automatic</small></div>
+  </section>
+
+  <section class="gate-section">
+    <div class="section-heading">
+      <p class="eyebrow">Six promotion gates</p>
+      <h2>No single signal is enough.</h2>
+    </div>
+    <div class="gate-grid">
+      {gates.map(([title, copy], index) => (
+        <article><span>{String(index + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{copy}</p></article>
+      ))}
+    </div>
+  </section>
+
+  <section class="threat-table">
+    <div class="section-heading">
+      <p class="eyebrow">Explicit threat boundaries</p>
+      <h2>What never crosses by default.</h2>
+    </div>
+    <div role="table" aria-label="Praxonne threat boundaries">
+      <div role="row" class="table-head"><span role="columnheader">Threat</span><span role="columnheader">Boundary</span></div>
+      <div role="row"><span role="cell">SSRF / open proxy</span><span role="cell">Policy-owned destinations; deny private and link-local ranges unless explicitly bound.</span></div>
+      <div role="row"><span role="cell">Prompt injection</span><span role="cell">Traffic is data, never agent instructions; tool calls are allow-listed and schema checked.</span></div>
+      <div role="row"><span role="cell">Sandbox escape</span><span role="cell">The child-process API is not the security boundary; production execution requires an external isolated workload.</span></div>
+      <div role="row"><span role="cell">Secret exfiltration</span><span role="cell">No inherited environment, no broad PAT, redacted structured logs, default-deny egress.</span></div>
+      <div role="row"><span role="cell">Malicious proposal</span><span role="cell">Namespaced branch, signed provenance, draft PR, required checks, protected base branch.</span></div>
+      <div role="row"><span role="cell">Duplicate mutation</span><span role="cell">Idempotency key binds request, route revision, source digest, and candidate digest.</span></div>
+    </div>
+  </section>
+
+  <section class="disclosure-callout">
+    <div><p class="eyebrow">Found something?</p><h2>Report it privately.</h2></div>
+    <p>Use the private security advisory flow on the relevant GitHub repository. Never include live credentials, customer traffic, or source bundles in a public issue.</p>
+  </section>
+</BaseLayout>

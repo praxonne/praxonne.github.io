@@ -1,0 +1,98 @@
+schema_version = 1
+plan_digest_sha256 = "e9cc4eca3d9d7a734ad83f2ee035d4e51b4752ab566b3e64b2430d4e7266c5d5"
+
+[[tools.nodejs]]
+requirement = "24.19.0"
+resolved = "24.19.0"
+backend = "zed-catalog"
+backend_version = "1"
+
+[tools.nodejs.source]
+kind = "http"
+locator = "https://nodejs.org/dist/v24.19.0/node-v24.19.0-linux-arm64.tar.gz"
+immutable = true
+portable = false
+
+[tools.nodejs.artifact]
+sha256 = "d28c8a5bf0a808f0ed434a1dce8c54ae98f0371c0bd86ac58abc613f73e6643f"
+size = 57128466
+format = "tar_gz"
+mirrors = ["https://nodejs.org/dist/v24.19.0/node-v24.19.0-linux-arm64.tar.gz"]
+
+[tools.nodejs.artifact.extensions]
+"zed-pkg.archive-layout" = "raw"
+
+[tools.nodejs.platform]
+target = "aarch64-unknown-linux-gnu"
+os = "linux"
+arch = "aarch64"
+libc = "gnu"
+
+[tools.nodejs.install]
+root = "node-v24.19.0-linux-arm64"
+bin_dirs = ["bin"]
+
+[[tools.nodejs.install.executables]]
+name = "corepack"
+path = "lib/node_modules/corepack/dist/corepack.js"
+
+[[tools.nodejs.install.executables]]
+name = "node"
+path = "bin/node"
+aliases = ["nodejs"]
+
+[[tools.nodejs.install.executables]]
+name = "npm"
+path = "lib/node_modules/npm/bin/npm-cli.js"
+
+[[tools.nodejs.install.executables]]
+name = "npx"
+path = "lib/node_modules/npm/bin/npx-cli.js"
+
+[[tools.nodejs]]
+requirement = "24.19.0"
+resolved = "24.19.0"
+backend = "zed-catalog"
+backend_version = "1"
+
+[tools.nodejs.source]
+kind = "http"
+locator = "https://nodejs.org/dist/v24.19.0/node-v24.19.0-linux-x64.tar.gz"
+immutable = true
+portable = false
+
+[tools.nodejs.artifact]
+sha256 = "f625d97cd707df4ff96254916fbc5ff014f09c09effe5a1e0ca8f6d41a8789d4"
+size = 57409532
+format = "tar_gz"
+mirrors = ["https://nodejs.org/dist/v24.19.0/node-v24.19.0-linux-x64.tar.gz"]
+
+[tools.nodejs.artifact.extensions]
+"zed-pkg.archive-layout" = "raw"
+
+[tools.nodejs.platform]
+target = "x86_64-unknown-linux-gnu"
+os = "linux"
+arch = "x86_64"
+libc = "gnu"
+
+[tools.nodejs.install]
+root = "node-v24.19.0-linux-x64"
+bin_dirs = ["bin"]
+
+[[tools.nodejs.install.executables]]
+name = "corepack"
+path = "lib/node_modules/corepack/dist/corepack.js"
+
+[[tools.nodejs.install.executables]]
+name = "node"
+path = "bin/node"
+aliases = ["nodejs"]
+
+[[tools.nodejs.install.executables]]
+name = "npm"
+path = "lib/node_modules/npm/bin/npm-cli.js"
+
+[[tools.nodejs.install.executables]]
+name = "npx"
+path = "lib/node_modules/npm/bin/npx-cli.js"

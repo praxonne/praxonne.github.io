@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://praxonne.github.io/sitemap.xml

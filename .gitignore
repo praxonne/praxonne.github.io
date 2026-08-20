@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.astro/
+.zed/*
+!.zed/environment.lock.toml
+.DS_Store
+*.log

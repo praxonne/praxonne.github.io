@@ -1,0 +1,22 @@
+{
+  "name": "praxonne-marketing-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.19.0",
+  "engines": {
+    "node": "24.19.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "typecheck": "astro check",
+    "build": "astro build",
+    "test:site": "node tests/site-contract.mjs",
+    "check": "pnpm run typecheck && pnpm run build && pnpm run test:site"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "astro": "7.2.4",
+    "typescript": "6.0.3"
+  }
+}

@@ -1,0 +1,21 @@
+---
+const path = Astro.url.pathname;
+const links = [
+  { href: "/architecture/", label: "Architecture" },
+  { href: "/security/", label: "Security" },
+  { href: "/developers/", label: "Developers" },
+];
+---
+
+<header class="site-header">
+  <a class="brand" href="/" aria-label="Praxonne home">
+    <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span>praxonne</span>
+  </a>
+  <nav aria-label="Primary navigation">
+    {links.map((link) => (
+      <a href={link.href} aria-current={path === link.href ? "page" : undefined}>{link.label}</a>
+    ))}
+  </nav>
+  <a class="header-cta" href="https://github.com/praxonne">GitHub <span aria-hidden="true">↗</span></a>
+</header>
