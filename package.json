@@ -12,7 +12,7 @@
     "typecheck": "astro check",
     "build": "astro build",
     "test:site": "node tests/site-contract.mjs",
-    "check": "pnpm run typecheck && pnpm run build && pnpm run test:site"
+    "check": "astro check && astro build && node tests/site-contract.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
