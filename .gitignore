@@ -5,3 +5,9 @@ dist/
 !.zed/environment.lock.toml
 .DS_Store
 *.log
+
+# Repository-local temporary data and authorized Git worktrees
+tmp
+temp
+tmp/worktrees
+temp/worktrees
