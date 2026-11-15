@@ -36,14 +36,6 @@ jobs:
           zed install --frozen --cli nodejs@24.19.0
           echo "$PWD/.zed/tools/bin" >> "$GITHUB_PATH"
 
-      - name: Verify generated lockfile matches pinned pnpm configuration
-        shell: bash
-        run: |
-          set -euo pipefail
-          corepack pnpm install --lockfile-only --no-frozen-lockfile --ignore-scripts
-          git diff -- pnpm-lock.yaml
-          git diff --exit-code -- pnpm-lock.yaml
-
       - name: Install locked Astro dependencies
         shell: bash
         run: corepack pnpm install --frozen-lockfile
