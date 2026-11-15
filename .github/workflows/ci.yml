@@ -40,6 +40,15 @@ jobs:
         shell: bash
         run: corepack pnpm install --frozen-lockfile
 
+      - name: Verify Astro checker loads with locked native dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          await import("@astrojs/check");
+          console.log("ASTRO_CHECKER_IMPORT=VERIFIED");
+          NODE
+
       - name: Typecheck, build, and verify site contract
         shell: bash
         run: corepack pnpm run check

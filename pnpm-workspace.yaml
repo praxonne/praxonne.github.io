@@ -2,3 +2,10 @@ allowBuilds:
   esbuild: true
 onlyBuiltDependencies:
   - esbuild
+
+# Astro 7.4.7's native TypeScript compiler needs emnapi/core 1.11.3 paired
+# with runtime 1.11.3; avoid resolving a separate Rolldown WASI beta peer.
+packageExtensions:
+  '@emnapi/core@1.11.3':
+    dependencies:
+      '@emnapi/runtime': 1.11.3
